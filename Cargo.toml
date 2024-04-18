@@ -1,0 +1,12 @@
+[workspace]
+members = ["kf6", "kf6-build"]
+resolver = "2"
+
+[workspace.dependencies]
+cxx = "1.0.121"
+cxx-qt = { git = "https://github.com/KDAB/cxx-qt", branch = "main" }
+cxx-qt-lib = { git = "https://github.com/KDAB/cxx-qt", branch = "main" }
+cxx-qt-build = { git = "https://github.com/KDAB/cxx-qt", branch = "main" }
+cxx-qt-lib-headers = { git = "https://github.com/KDAB/cxx-qt", branch = "main" }
+cxx-kf6 = { path = "kf6" }
+cxx-kf6-build = { path = "kf6-build" }
