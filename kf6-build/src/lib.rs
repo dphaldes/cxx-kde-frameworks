@@ -45,10 +45,16 @@ pub fn setup_builder(mut builder: CxxQtBuilder) -> CxxQtBuilder {
     // load custom headers
     let mut opts = CxxQtBuildersOpts::default();
 
-    for (contents, name) in [(
-        include_str!("../include/ki18n/klocalizedcontext.h"),
-        "klocalizedcontext.h",
-    )] {
+    for (contents, name) in [
+        (
+            include_str!("../include/ki18n/klocalizedcontext.h"),
+            "klocalizedcontext.h",
+        ),
+        (
+            include_str!("../include/ki18n/klocalizedstring.h"),
+            "klocalizedstring.h",
+        ),
+    ] {
         opts = opts.header(contents, "kf6", name);
     }
 

@@ -1,13 +1,13 @@
 #[cxx_qt::bridge]
 mod ffi {
     unsafe extern "C++Qt" {
+        include!("cxx-qt-lib/qqmlengine.h");
+        type QQmlEngine = cxx_qt_lib::QQmlEngine;
+
         include!("kf6/klocalizedcontext.h");
 
         #[qobject]
         type KLocalizedContext;
-
-        include!("cxx-qt-lib/qqmlengine.h");
-        type QQmlEngine = cxx_qt_lib::QQmlEngine;
     }
 
     #[namespace = "rust::kf6"]
