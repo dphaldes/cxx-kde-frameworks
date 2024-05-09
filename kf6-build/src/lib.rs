@@ -1,8 +1,9 @@
 use std::path::PathBuf;
 
-use cxx_qt_build::CxxQtBuilder;
+use cxx_qt_build::{CxxQtBuilder, CxxQtBuildersOpts};
 
-pub fn setup_builder(builder: CxxQtBuilder) -> CxxQtBuilder {
+pub fn setup_builder(mut builder: CxxQtBuilder) -> CxxQtBuilder {
+    // load and link against KDE libs
     let mut include_dir = String::from("/usr/include/");
     let mut lib_dir = String::from("/usr/lib/");
 
@@ -31,13 +32,26 @@ pub fn setup_builder(builder: CxxQtBuilder) -> CxxQtBuilder {
     );
     println!("cargo:rustc-link-lib=KF6I18n");
 
-    let ki18n_include_path = PathBuf::from(include_dir)
+    let kf6_include_path = PathBuf::from(include_dir)
         .canonicalize()
         .expect("Cannot get canonical path of KDE_INCLUDEDIR")
         .join("KF6")
         .join("KI18n");
 
-    builder.cc_builder(|cc| {
-        cc.include(format!("{}", ki18n_include_path.display()));
-    })
+    builder = builder.cc_builder(|cc| {
+        cc.include(format!("{}", kf6_include_path.display()));
+    });
+
+    // load custom headers
+    let mut opts = CxxQtBuildersOpts::default();
+
+    for (contents, name) in [(
+        include_str!("../include/ki18n/klocalizedcontext.h"),
+        "klocalizedcontext.h",
+    )] {
+        opts = opts.header(contents, "kf6", name);
+    }
+
+    builder.with_opts(opts)
 }
+
