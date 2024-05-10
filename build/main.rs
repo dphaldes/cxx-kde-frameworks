@@ -1,9 +1,11 @@
+mod kf6_build;
 use cxx_qt_build::CxxQtBuilder;
 
 fn main() {
     let mut builder = CxxQtBuilder::new();
+    builder = kf6_build::link_libraries(builder);
     builder = builder.with_opts(cxx_qt_lib_headers::build_opts());
-    builder = cxx_kf6_build::setup_builder(builder);
+    builder = builder.with_opts(kf6_build::header_opts());
 
     let rust_bridges = vec!["ki18n/klocalizedcontext", "ki18n/klocalizedstring"];
     for source in &rust_bridges {

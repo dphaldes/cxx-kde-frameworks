@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use cxx_qt_build::{CxxQtBuilder, CxxQtBuildersOpts};
 
-pub fn setup_builder(mut builder: CxxQtBuilder) -> CxxQtBuilder {
+pub fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
     // load and link against KDE libs
     let mut include_dir = String::from("/usr/include/");
     let mut lib_dir = String::from("/usr/lib/");
@@ -38,10 +38,12 @@ pub fn setup_builder(mut builder: CxxQtBuilder) -> CxxQtBuilder {
         .join("KF6")
         .join("KI18n");
 
-    builder = builder.cc_builder(|cc| {
+    builder.cc_builder(|cc| {
         cc.include(format!("{}", kf6_include_path.display()));
-    });
+    })
+}
 
+pub fn header_opts() -> CxxQtBuildersOpts {
     // load custom headers
     let mut opts = CxxQtBuildersOpts::default();
 
@@ -58,6 +60,5 @@ pub fn setup_builder(mut builder: CxxQtBuilder) -> CxxQtBuilder {
         opts = opts.header(contents, "kf6", name);
     }
 
-    builder.with_opts(opts)
+    opts
 }
-

@@ -84,18 +84,10 @@ name = "cxx-kf6"
 version = "0.1.0"
 dependencies = [
  "cxx",
- "cxx-kf6-build",
  "cxx-qt",
  "cxx-qt-build",
  "cxx-qt-lib",
  "cxx-qt-lib-headers",
-]
-
-[[package]]
-name = "cxx-kf6-build"
-version = "0.1.0"
-dependencies = [
- "cxx-qt-build",
 ]
 
 [[package]]
