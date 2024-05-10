@@ -1,6 +1,7 @@
 #[cxx_qt::bridge]
 mod ffi {
     unsafe extern "C++Qt" {
+        include!("cxx-qt-lib/qbytearray.h");
         type QByteArray = cxx_qt_lib::QByteArray;
 
         include!("kf6/klocalizedstring.h");
@@ -13,6 +14,9 @@ mod ffi {
     unsafe extern "C++" {
         #[rust_name = "set_application_domain"]
         fn setApplicationDomain(domain: &QByteArray);
+
+        #[rust_name = "application_domain"]
+        fn applicationDomain() -> QByteArray;
     }
 }
 
@@ -23,5 +27,9 @@ pub use ffi::KLocalizedString;
 impl KLocalizedString {
     pub fn set_application_domain(domain: &QByteArray) {
         ffi::set_application_domain(domain);
+    }
+
+    pub fn application_domain() -> QByteArray {
+        ffi::application_domain()
     }
 }

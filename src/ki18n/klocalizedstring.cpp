@@ -7,5 +7,7 @@ void setApplicationDomain(const QByteArray &domain) {
   KLocalizedString::setApplicationDomain(domain);
 }
 
+QByteArray applicationDomain() { return KLocalizedString::applicationDomain(); }
+
 } // namespace kf6
 } // namespace rust
