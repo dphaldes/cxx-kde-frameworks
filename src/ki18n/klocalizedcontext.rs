@@ -1,7 +1,7 @@
-#[cxx_qt::bridge]
+#[cxx_qt::bridge(cxx_file_stem = "klocalizedcontext")]
 mod ffi {
     unsafe extern "C++Qt" {
-        include!("cxx-qt-/qqmlengine.h");
+        include!("cxx-qt-lib/qqmlengine.h");
         type QQmlEngine = cxx_qt_lib::QQmlEngine;
 
         include!("kf6/klocalizedcontext.h");
@@ -12,8 +12,8 @@ mod ffi {
 
     #[namespace = "rust::kf6"]
     unsafe extern "C++" {
-        #[rust_name = "init_from_engine"]
-        fn initFromEngine(engine: Pin<&mut QQmlEngine>);
+        #[rust_name = "initialize_engine"]
+        fn initializeEngine(engine: Pin<&mut QQmlEngine>);
     }
 }
 use core::pin::Pin;
@@ -22,7 +22,7 @@ use cxx_qt_lib::QQmlEngine;
 pub use ffi::KLocalizedContext;
 
 impl KLocalizedContext {
-    pub fn init_from_engine(engine: Pin<&mut QQmlEngine>) {
-        ffi::init_from_engine(engine);
+    pub fn initialize_engine(engine: Pin<&mut QQmlEngine>) {
+        ffi::initialize_engine(engine);
     }
 }

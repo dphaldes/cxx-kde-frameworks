@@ -3,7 +3,7 @@
 namespace rust {
 namespace kf6 {
 
-void initFromEngine(QQmlEngine &engine) {
+void initializeEngine(QQmlEngine &engine) {
   engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 }
 

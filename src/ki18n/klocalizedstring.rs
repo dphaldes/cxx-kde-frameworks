@@ -1,4 +1,4 @@
-#[cxx_qt::bridge]
+#[cxx_qt::bridge(cxx_file_stem = "klocalizedstring")]
 mod ffi {
     unsafe extern "C++Qt" {
         include!("cxx-qt-lib/qbytearray.h");

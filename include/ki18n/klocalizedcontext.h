@@ -9,7 +9,7 @@
 namespace rust {
 
 namespace kf6 {
-void initFromEngine(QQmlEngine &engine);
+void initializeEngine(QQmlEngine &engine);
 
 }
 
