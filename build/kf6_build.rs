@@ -1,11 +1,12 @@
-use std::path::PathBuf;
+use std::{collections::HashMap, path::PathBuf};
 
 use cxx_qt_build::{CxxQtBuilder, CxxQtBuildersOpts};
 
 pub fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
     // load and link against KDE libs
-    let mut include_dir = String::from("/usr/include/");
+    let mut include_dir = String::from("/usr/include/KF6/");
     let mut lib_dir = String::from("/usr/lib/");
+    let libraries = HashMap::from([("CoreAddons", "KCoreAddons"), ("I18n", "KI18n")]);
 
     if let Ok(dir) = std::env::var("KDE_INCLUDEDIR") {
         include_dir = dir;
@@ -30,16 +31,19 @@ pub fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
             .expect("Cannot get canonical path of KDE_LIBDIR")
             .display()
     );
-    println!("cargo:rustc-link-lib=KF6I18n");
+
+    for (k, _) in &libraries {
+        println!("cargo:rustc-link-lib=KF6{}", k);
+    }
 
     let kf6_include_path = PathBuf::from(include_dir)
         .canonicalize()
-        .expect("Cannot get canonical path of KDE_INCLUDEDIR")
-        .join("KF6")
-        .join("KI18n");
+        .expect("Cannot get canonical path of KDE_INCLUDEDIR");
 
-    builder.cc_builder(|cc| {
-        cc.include(format!("{}", kf6_include_path.display()));
+    builder.cc_builder(move |cc| {
+        for (_, v) in &libraries {
+            cc.include(format!("{}", kf6_include_path.join(v).display()));
+        }
     })
 }
 
@@ -48,6 +52,10 @@ pub fn header_opts() -> CxxQtBuildersOpts {
     let mut opts = CxxQtBuildersOpts::default();
 
     for (contents, name) in [
+        (
+            include_str!("../include/kcoreaddons/kaboutdata.h"),
+            "kaboutdata.h",
+        ),
         (
             include_str!("../include/ki18n/klocalizedcontext.h"),
             "klocalizedcontext.h",

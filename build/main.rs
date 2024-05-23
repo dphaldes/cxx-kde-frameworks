@@ -5,7 +5,11 @@ fn main() {
     let mut builder = CxxQtBuilder::new();
     builder = kf6_build::link_libraries(builder);
 
-    let files = vec!["ki18n/klocalizedcontext", "ki18n/klocalizedstring"];
+    let files = vec![
+        "kcoreaddons/kaboutdata",
+        "ki18n/klocalizedcontext",
+        "ki18n/klocalizedstring",
+    ];
 
     for file in &files {
         builder = builder.file(format!("src/{file}.rs"))
