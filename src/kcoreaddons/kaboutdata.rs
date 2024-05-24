@@ -51,6 +51,14 @@ mod ffi {
 
         #[rust_name = "set_application_data"]
         fn setApplicationData(about_data: &KAboutData);
+
+        #[rust_name = "register_qml_singleton_type"]
+        fn registerQmlSingletonType(
+            uri: String,
+            version_major: i32,
+            version_minor: i32,
+            type_name: String,
+        );
     }
 }
 
@@ -77,5 +85,14 @@ impl KAboutData {
 
     pub fn set_application_data(about_data: &KAboutData) {
         ffi::set_application_data(about_data);
+    }
+
+    pub fn register_qml_singleton_type(
+        uri: String,
+        version_major: i32,
+        version_minor: i32,
+        type_name: String,
+    ) {
+        ffi::register_qml_singleton_type(uri, version_major, version_minor, type_name);
     }
 }

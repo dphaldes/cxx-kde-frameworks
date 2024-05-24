@@ -24,33 +24,41 @@ mod ffi {
         fn applicationDomain() -> QByteArray;
 
         #[rust_name = "ki18n"]
-        fn r_ki18n(text: &str) -> UniquePtr<KLocalizedString>;
+        fn r_ki18n(text: String) -> UniquePtr<KLocalizedString>;
 
         #[rust_name = "ki18nc"]
-        fn r_ki18nc(context: &str, text: &str) -> UniquePtr<KLocalizedString>;
+        fn r_ki18nc(context: String, text: String) -> UniquePtr<KLocalizedString>;
 
         #[rust_name = "ki18ncp"]
-        fn r_ki18ncp(context: &str, singular: &str, plural: &str) -> UniquePtr<KLocalizedString>;
+        fn r_ki18ncp(
+            context: String,
+            singular: String,
+            plural: String,
+        ) -> UniquePtr<KLocalizedString>;
 
         #[rust_name = "ki18nd"]
-        fn r_ki18nd(domain: &str, text: &str) -> UniquePtr<KLocalizedString>;
+        fn r_ki18nd(domain: String, text: String) -> UniquePtr<KLocalizedString>;
 
         #[rust_name = "ki18ndc"]
-        fn r_ki18ndc(domain: &str, context: &str, text: &str) -> UniquePtr<KLocalizedString>;
+        fn r_ki18ndc(domain: String, context: String, text: String) -> UniquePtr<KLocalizedString>;
 
         #[rust_name = "ki18ndcp"]
         fn r_ki18ndcp(
-            domain: &str,
-            context: &str,
-            singular: &str,
-            plural: &str,
+            domain: String,
+            context: String,
+            singular: String,
+            plural: String,
         ) -> UniquePtr<KLocalizedString>;
 
         #[rust_name = "ki18ndp"]
-        fn r_ki18ndp(domain: &str, singular: &str, plural: &str) -> UniquePtr<KLocalizedString>;
+        fn r_ki18ndp(
+            domain: String,
+            singular: String,
+            plural: String,
+        ) -> UniquePtr<KLocalizedString>;
 
         #[rust_name = "ki18np"]
-        fn r_ki18np(singular: &str, plural: &str) -> UniquePtr<KLocalizedString>;
+        fn r_ki18np(singular: String, plural: String) -> UniquePtr<KLocalizedString>;
     }
 
     unsafe extern "C++" {
@@ -73,75 +81,83 @@ impl KLocalizedString {
         ffi::application_domain()
     }
 
-    pub fn ki18n(text: &str) -> UniquePtr<Self> {
+    pub fn ki18n(text: String) -> UniquePtr<Self> {
         ffi::ki18n(text)
     }
 
-    pub fn ki18nc(context: &str, text: &str) -> UniquePtr<KLocalizedString> {
+    pub fn ki18nc(context: String, text: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18nc(context, text)
     }
 
-    pub fn ki18ncp(context: &str, singular: &str, plural: &str) -> UniquePtr<KLocalizedString> {
+    pub fn ki18ncp(
+        context: String,
+        singular: String,
+        plural: String,
+    ) -> UniquePtr<KLocalizedString> {
         ffi::ki18ncp(context, singular, plural)
     }
 
-    pub fn ki18nd(domain: &str, text: &str) -> UniquePtr<KLocalizedString> {
+    pub fn ki18nd(domain: String, text: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18nd(domain, text)
     }
 
-    pub fn ki18ndc(domain: &str, context: &str, text: &str) -> UniquePtr<KLocalizedString> {
+    pub fn ki18ndc(domain: String, context: String, text: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18ndc(domain, context, text)
     }
 
     pub fn ki18ndcp(
-        domain: &str,
-        context: &str,
-        singular: &str,
-        plural: &str,
+        domain: String,
+        context: String,
+        singular: String,
+        plural: String,
     ) -> UniquePtr<KLocalizedString> {
         ffi::ki18ndcp(domain, context, singular, plural)
     }
 
-    pub fn ki18ndp(domain: &str, singular: &str, plural: &str) -> UniquePtr<KLocalizedString> {
+    pub fn ki18ndp(
+        domain: String,
+        singular: String,
+        plural: String,
+    ) -> UniquePtr<KLocalizedString> {
         ffi::ki18ndp(domain, singular, plural)
     }
 
-    pub fn ki18np(singular: &str, plural: &str) -> UniquePtr<KLocalizedString> {
+    pub fn ki18np(singular: String, plural: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18np(singular, plural)
     }
 }
 
 // Convert this into macros later on with substitutions
 impl KLocalizedString {
-    pub fn i18n(text: &str) -> QString {
+    pub fn i18n(text: String) -> QString {
         KLocalizedString::ki18n(text).to_qstring()
     }
 
-    pub fn i18nc(context: &str, text: &str) -> QString {
+    pub fn i18nc(context: String, text: String) -> QString {
         KLocalizedString::ki18nc(context, text).to_qstring()
     }
 
-    pub fn i18ncp(context: &str, singular: &str, plural: &str) -> QString {
+    pub fn i18ncp(context: String, singular: String, plural: String) -> QString {
         KLocalizedString::ki18ncp(context, singular, plural).to_qstring()
     }
 
-    pub fn i18nd(domain: &str, text: &str) -> QString {
+    pub fn i18nd(domain: String, text: String) -> QString {
         KLocalizedString::ki18nd(domain, text).to_qstring()
     }
 
-    pub fn i18ndc(domain: &str, context: &str, text: &str) -> QString {
+    pub fn i18ndc(domain: String, context: String, text: String) -> QString {
         KLocalizedString::ki18ndc(domain, context, text).to_qstring()
     }
 
-    pub fn i18ndcp(domain: &str, context: &str, singular: &str, plural: &str) -> QString {
+    pub fn i18ndcp(domain: String, context: String, singular: String, plural: String) -> QString {
         KLocalizedString::ki18ndcp(domain, context, singular, plural).to_qstring()
     }
 
-    pub fn i18ndp(domain: &str, singular: &str, plural: &str) -> QString {
+    pub fn i18ndp(domain: String, singular: String, plural: String) -> QString {
         KLocalizedString::ki18ndp(domain, singular, plural).to_qstring()
     }
 
-    pub fn i18np(singular: &str, plural: &str) -> QString {
+    pub fn i18np(singular: String, plural: String) -> QString {
         KLocalizedString::ki18np(singular, plural).to_qstring()
     }
 }
