@@ -17,13 +17,5 @@ void setApplicationData(const KAboutData &aboutData) {
   KAboutData::setApplicationData(aboutData);
 }
 
-void registerQmlSingletonType(rust::String uri, int version_major,
-                              int version_minor, rust::String type_name) {
-  qmlRegisterSingletonType(
-      uri.c_str(), version_major, version_minor, type_name.c_str(),
-      [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
-        return engine->toScriptValue(KAboutData::applicationData());
-      });
-}
 } // namespace kf6
 } // namespace rust
