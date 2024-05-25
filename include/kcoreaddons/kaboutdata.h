@@ -1,8 +1,7 @@
 #pragma once
 
 #include <KAboutData>
-#include <QQmlEngine>
-#include <QString>
+
 
 #include "rust/cxx.h"
 

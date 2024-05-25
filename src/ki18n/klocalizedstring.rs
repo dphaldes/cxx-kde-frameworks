@@ -127,8 +127,10 @@ impl KLocalizedString {
     }
 }
 
-// Convert this into macros later on with substitutions
-impl KLocalizedString {
+pub mod extensions {
+    use super::{KLocalizedString, QString};
+
+    // Convert this into macros later on with substitutions
     pub fn i18n(text: String) -> QString {
         KLocalizedString::ki18n(text).to_qstring()
     }

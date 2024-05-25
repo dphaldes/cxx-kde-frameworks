@@ -1,7 +1,5 @@
 #include "kf6/kaboutdata.h"
 
-#include <iostream>
-
 namespace rust {
 namespace kf6 {
 
