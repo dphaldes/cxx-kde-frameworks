@@ -68,7 +68,7 @@ mod ffi {
 }
 
 use cxx::UniquePtr;
-use cxx_qt_lib::{QByteArray, QString};
+use cxx_qt_lib::QByteArray;
 
 pub use ffi::KLocalizedString;
 
@@ -124,42 +124,5 @@ impl KLocalizedString {
 
     pub fn ki18np(singular: String, plural: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18np(singular, plural)
-    }
-}
-
-pub mod extensions {
-    use super::{KLocalizedString, QString};
-
-    // Convert this into macros later on with substitutions
-    pub fn i18n(text: String) -> QString {
-        KLocalizedString::ki18n(text).to_qstring()
-    }
-
-    pub fn i18nc(context: String, text: String) -> QString {
-        KLocalizedString::ki18nc(context, text).to_qstring()
-    }
-
-    pub fn i18ncp(context: String, singular: String, plural: String) -> QString {
-        KLocalizedString::ki18ncp(context, singular, plural).to_qstring()
-    }
-
-    pub fn i18nd(domain: String, text: String) -> QString {
-        KLocalizedString::ki18nd(domain, text).to_qstring()
-    }
-
-    pub fn i18ndc(domain: String, context: String, text: String) -> QString {
-        KLocalizedString::ki18ndc(domain, context, text).to_qstring()
-    }
-
-    pub fn i18ndcp(domain: String, context: String, singular: String, plural: String) -> QString {
-        KLocalizedString::ki18ndcp(domain, context, singular, plural).to_qstring()
-    }
-
-    pub fn i18ndp(domain: String, singular: String, plural: String) -> QString {
-        KLocalizedString::ki18ndp(domain, singular, plural).to_qstring()
-    }
-
-    pub fn i18np(singular: String, plural: String) -> QString {
-        KLocalizedString::ki18np(singular, plural).to_qstring()
     }
 }

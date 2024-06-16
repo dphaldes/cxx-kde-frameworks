@@ -10,7 +10,7 @@ mod ffi {
         include!("kf6/kaboutdata.h");
         type KAboutData;
 
-        #[rust_name = "add_author"]
+        #[rust_name = "add_author_raw"]
         fn addAuthor(
             self: Pin<&mut KAboutData>,
             name: &QString,
@@ -20,7 +20,7 @@ mod ffi {
             avatar_url: &QUrl,
         ) -> Pin<&mut KAboutData>;
 
-        #[rust_name = "add_credit"]
+        #[rust_name = "add_credit_raw"]
         fn addCredit(
             self: Pin<&mut KAboutData>,
             name: &QString,
@@ -30,7 +30,7 @@ mod ffi {
             avatar_url: &QUrl,
         ) -> Pin<&mut KAboutData>;
 
-        #[rust_name = "set_translator"]
+        #[rust_name = "set_translator_raw"]
         fn setTranslator(
             self: Pin<&mut KAboutData>,
             name: &QString,
@@ -54,9 +54,16 @@ mod ffi {
     }
 }
 
+use std::pin::Pin;
+
 use cxx::UniquePtr;
 use cxx_qt_lib::QString;
 pub use ffi::KAboutData;
+
+use super::KAuthor;
+use super::KCredit;
+use super::KTranslator;
+use super::License;
 
 impl KAboutData {
     pub fn from(
@@ -82,24 +89,31 @@ impl KAboutData {
             eprintln!("KAboutData couldn't be unwrapped");
         }
     }
-}
 
-#[allow(non_camel_case_types)]
-pub enum License {
-    Custom = -2,
-    File = -1,
-    Unknown = 0,
-    GPL = 1,
-    LGPL = 2,
-    BSDL = 3,
-    Artistic = 4,
-    GPL_V3 = 5,
-    LGPL_V3 = 6,
-    LGPL_V2_1 = 7,
-    MIT = 8,
-}
+    pub fn add_author(self: Pin<&mut KAboutData>, author: KAuthor) -> Pin<&mut KAboutData> {
+        return self.add_author_raw(
+            &author.name,
+            &author.task,
+            &author.email_address,
+            &author.web_address,
+            &author.avatar_url,
+        );
+    }
 
-impl License {
-    pub const GPL_V2: Self = Self::GPL;
-    pub const LGPL_V2: Self = Self::LGPL;
+    pub fn add_credit(self: Pin<&mut KAboutData>, credit: KCredit) -> Pin<&mut KAboutData> {
+        return self.add_credit_raw(
+            &credit.name,
+            &credit.task,
+            &credit.email_address,
+            &credit.web_address,
+            &credit.avatar_url,
+        );
+    }
+
+    pub fn set_translator(
+        self: Pin<&mut KAboutData>,
+        translator: KTranslator,
+    ) -> Pin<&mut KAboutData> {
+        return self.set_translator_raw(&translator.name, &translator.email_address);
+    }
 }
