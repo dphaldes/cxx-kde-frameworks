@@ -1,11 +1,11 @@
-#include "kf6/kaboutdata.h"
+#include "cxx-kde-frameworks/kaboutdata.h"
 
 namespace rust {
 namespace kf6 {
 
 auto from(QString componentName, QString displayName, QString version,
-          QString shortDescription, int license)
-    -> std::unique_ptr<KAboutData> {
+          QString shortDescription,
+          int license) -> std::unique_ptr<KAboutData> {
   return std::make_unique<KAboutData>(
       componentName, displayName, version, shortDescription,
       static_cast<KAboutLicense::LicenseKey>(license));

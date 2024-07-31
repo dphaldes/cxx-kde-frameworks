@@ -1,4 +1,4 @@
-#include "kf6/klocalizedcontext.h"
+#include "cxx-kde-frameworks/klocalizedcontext.h"
 
 namespace rust {
 namespace kf6 {

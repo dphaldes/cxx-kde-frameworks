@@ -7,7 +7,7 @@ mod ffi {
         include!("cxx-qt-lib/qurl.h");
         type QUrl = cxx_qt_lib::QUrl;
 
-        include!("kf6/kaboutdata.h");
+        include!("cxx-kde-frameworks/kaboutdata.h");
         type KAboutData;
 
         #[rust_name = "add_author_raw"]

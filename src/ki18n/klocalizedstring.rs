@@ -8,7 +8,7 @@ mod ffi {
         include!("cxx-qt-lib/qstring.h");
         type QString = cxx_qt_lib::QString;
 
-        include!("kf6/klocalizedstring.h");
+        include!("cxx-kde-frameworks/klocalizedstring.h");
 
         #[qobject]
         type KLocalizedString;

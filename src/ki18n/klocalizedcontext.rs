@@ -4,7 +4,7 @@ mod ffi {
         include!("cxx-qt-lib/qqmlengine.h");
         type QQmlEngine = cxx_qt_lib::QQmlEngine;
 
-        include!("kf6/klocalizedcontext.h");
+        include!("cxx-kde-frameworks/klocalizedcontext.h");
 
         #[qobject]
         type KLocalizedContext;

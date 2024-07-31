@@ -1,6 +1,6 @@
 use std::{collections::HashMap, path::PathBuf};
 
-use cxx_qt_build::{CxxQtBuilder, CxxQtBuildersOpts};
+use cxx_qt_build::CxxQtBuilder;
 
 pub fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
     // load and link against KDE libs
@@ -45,28 +45,4 @@ pub fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
             cc.include(format!("{}", kf6_include_path.join(v).display()));
         }
     })
-}
-
-pub fn header_opts() -> CxxQtBuildersOpts {
-    // load custom headers
-    let mut opts = CxxQtBuildersOpts::default();
-
-    for (contents, name) in [
-        (
-            include_str!("../include/kcoreaddons/kaboutdata.h"),
-            "kaboutdata.h",
-        ),
-        (
-            include_str!("../include/ki18n/klocalizedcontext.h"),
-            "klocalizedcontext.h",
-        ),
-        (
-            include_str!("../include/ki18n/klocalizedstring.h"),
-            "klocalizedstring.h",
-        ),
-    ] {
-        opts = opts.header(contents, "kf6", name);
-    }
-
-    opts
 }

@@ -3,6 +3,7 @@ name = "cxx-kde-frameworks"
 version = "0.1.0"
 edition = "2021"
 build = "build/main.rs"
+links = "cxx-kde-frameworks"
 
 [dependencies]
 cxx = "1.0.121"
@@ -11,4 +12,3 @@ cxx-qt-lib = { git = "https://github.com/KDAB/cxx-qt", branch = "main" }
 
 [build-dependencies]
 cxx-qt-build = { git = "https://github.com/KDAB/cxx-qt", branch = "main", features = ["link_qt_object_files"] }
-cxx-qt-lib-headers = { git = "https://github.com/KDAB/cxx-qt", branch = "main" }
