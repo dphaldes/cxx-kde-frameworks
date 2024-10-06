@@ -2,9 +2,9 @@
 
 #include <KLocalizedContext>
 
-#include <QQmlApplicationEngine>
-#include <QQmlContext>
-#include <QQmlEngine>
+#include <QtQml/QQmlApplicationEngine>
+#include <QtQml/QQmlContext>
+#include <QtQml/QQmlEngine>
 
 namespace rust {
 

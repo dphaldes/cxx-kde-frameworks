@@ -1,4 +1,4 @@
-#[cxx_qt::bridge(cxx_file_stem = "klocalizedstring")]
+#[cxx_qt::bridge]
 mod ffi {
 
     unsafe extern "C++Qt" {
