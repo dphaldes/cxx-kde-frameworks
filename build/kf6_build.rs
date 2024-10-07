@@ -6,7 +6,7 @@ pub fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
     // load and link against KDE libs
     let mut include_dir = String::from("/usr/include/KF6/");
     let mut lib_dir = String::from("/usr/lib/");
-    let libraries = HashMap::from([("CoreAddons", "KCoreAddons"), ("I18n", "KI18n")]);
+    let libraries = HashMap::from([("CoreAddons", "KCoreAddons"), ("I18n", "KI18n"), ("Crash", "KCrash")]);
 
     if let Ok(dir) = std::env::var("KDE_INCLUDEDIR") {
         include_dir = dir;

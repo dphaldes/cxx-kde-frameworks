@@ -34,6 +34,7 @@ fn write_headers() {
 
     write_headers_in("kcoreaddons");
     write_headers_in("ki18n");
+    write_headers_in("kcrash");
 }
 
 fn main() {
@@ -51,6 +52,7 @@ fn main() {
         "kcoreaddons/kaboutdata",
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
+        "kcrash/kcrash"
     ];
 
     for source in &rust_files {
@@ -61,6 +63,7 @@ fn main() {
         "kcoreaddons/kaboutdata",
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
+        "kcrash/kcrash"
     ];
 
     builder = builder.cc_builder(move |cc| {
