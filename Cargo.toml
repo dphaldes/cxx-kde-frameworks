@@ -8,7 +8,7 @@ links = "cxx-kde-frameworks"
 [dependencies]
 cxx = "1.0.121"
 cxx-qt = { git = "https://github.com/KDAB/cxx-qt", branch = "main" }
-cxx-qt-lib = { git = "https://github.com/KDAB/cxx-qt", branch = "main", features=["full_qt"] }
+cxx-qt-lib = { git = "https://github.com/KDAB/cxx-qt", branch = "main", features=["qt_full"] }
 
 [build-dependencies]
 cxx-qt-build = { git = "https://github.com/KDAB/cxx-qt", branch = "main", features = ["link_qt_object_files"] }
