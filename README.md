@@ -1,3 +1,6 @@
+# Project has been moved to KDE Invent
+Follow development on KDE's [Invent](https://invent.kde.org/libraries/cxx-kde-frameworks) or [GitHub mirror](https://github.com/KDE/cxx-kde-frameworks)
+
 # cxx-kde-frameworks
 
 Extends [cxx-qt](https://github.com/KDAB/cxx-qt) by adding bindings for KDE Frameworks.
